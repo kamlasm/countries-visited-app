@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Countries</title>
+</head>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <h1>My Countries</h1>
+    <div>
+        <h3>Stats</h3>
+        <p>Total countries: <span><%= userCountries.length %></span></p>
+        <p>World visited: <span><%= Math.floor(userCountries.length / 195 * 100) %></span>%</p>
+    </div>
+    <div>
+        <h3>Countries been</h3>
+        <button>
+            <a href="/user/<%= user.userId %>/new-country">Add a country</a>
+        </button>
+            <% userCountries.forEach(userCountry => { %>
+             <li><%= userCountry.countryName.name %></li>
+             <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
+             <a href="">Edit visits</a>
+             <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST"><button>Delete</button></form>
+            <% }) %>
+        <ul>
+
+        </ul>
+    </div>
+</body>
+</html>

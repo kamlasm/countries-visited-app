@@ -26,9 +26,9 @@ router.post('/sign-up', async (req, res) => {
 
         req.session.user = { 
             username: user.username,
-            userId: user._id 
+            userId: user._id
         }
-    
+        
         req.session.save(() => {
             res.redirect('/')
         })
@@ -44,25 +44,25 @@ router.get('/sign-in', (req, res) => {
 
 router.post('/sign-in', async (req, res) => {
     try {
-        const userInDatabase = await User.findOne({ username: req.body.username })
+        const user = await User.findOne({ username: req.body.username })
 
-        if (!userInDatabase) {
+        if (!user) {
             throw new Error('Login failed. Please try again.')
         }
     
-        const validPassword = bcrypt.compareSync(req.body.password, userInDatabase.password) 
+        const validPassword = bcrypt.compareSync(req.body.password, user.password) 
     
         if (!validPassword) {
             throw new Error('Login failed. Please try again.')
         }
-    
+
         req.session.user = {
-            username: userInDatabase.username,
-            userId: userInDatabase._id
+            username: user.username,
+            userId: user._id
         }
-        
+
         req.session.save(() => {
-            res.redirect('/')           
+            res.redirect(`/user/${user.id}`)           
         })
 
     } catch (error) {

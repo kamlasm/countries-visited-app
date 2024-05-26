@@ -9,9 +9,10 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 
 const authController = require('./controllers/auth.js')
-// const userController = require('./controllers/user.js')
+const userController = require('./controllers/user.js')
 // const communityController = require('./controllers/community.js')
 const passUserToView = require('./middleware/pass-user-to-view.js')
+const passCountryToView = require('./middleware/pass-country-to-view.js')
 
 const port = process.env.PORT ? process.env.PORT : 3000
 
@@ -31,9 +32,10 @@ app.use(session({
   }),
 }))
 app.use(passUserToView)
+app.use(passCountryToView)
 
 app.use('/auth', authController)
-// app.use('/user', userController)
+app.use('/user', userController)
 // app.use('/community', communityController)
 
 app.get('/', (req, res) => {

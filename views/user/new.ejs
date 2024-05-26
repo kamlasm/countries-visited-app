@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a country</title>
+</head>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <h1>Add a new country visited!</h1>
+    <form action="/user/<%= user.userId %>/new-country" method="POST">
+        <label for="countryName">Country: </label>
+        <select name="countryName">
+            <% country.forEach(country => { %>
+                <option value="<%= country.name %>"><%= country.name %></option>
+            <% }) %>
+        </select>
+        <p>Add details about the visit (optional)</p>
+        <div>
+            <label for="startDate">Start Date: </label>
+            <input type="date" name="startDate">
+        </div>
+        <div>
+            <label for="endDate">End Date: </label>
+            <input type="date" name="endDate">
+        </div>
+        <div>
+            <label for="highlights">Highlights: </label>
+            <textarea type="text" name="highlights"></textarea>
+        </div>
+        <div>
+            <label for="travellerTips">Traveller Tips: </label>
+            <textarea type="text" name="travellerTips"></textarea>
+        </div>
+        <div>
+            <label for="images">Photos: </label>
+            <input type="file" name="images">
+        </div>       
+        <button type="submit">Add country</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= userCountry.countryName.name %></title>
+</head>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <h1><%= userCountry.countryName.name %></h1>
+    <h3>Date visited: 
+    <% const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October','November', 'December'] %>
+    <%= userCountry.startDate.getDate() %> <%= monthNames[userCountry.startDate.getMonth()] %> <%= userCountry.startDate.getFullYear() %> to <%= userCountry.endDate.getDate() %> <%= monthNames[userCountry.endDate.getMonth()] %> <%= userCountry.endDate.getFullYear() %> </h3>
+    <p>Highlights: <%= userCountry.highlights %> </p>
+    <p>Traveller Tips: <%= userCountry.travellerTips %> </p>
+    <img src="<%= userCountry.images %>">
+</body>
+</html>
