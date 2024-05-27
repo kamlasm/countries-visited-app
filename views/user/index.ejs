@@ -21,7 +21,6 @@
             <% userCountries.forEach(userCountry => { %>
              <li><%= userCountry.countryName.name %></li>
              <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
-             <a href="">Edit visits</a>
              <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST"><button>Delete</button></form>
             <% }) %>
         <ul>

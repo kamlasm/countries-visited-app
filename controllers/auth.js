@@ -30,7 +30,7 @@ router.post('/sign-up', async (req, res) => {
         }
         
         req.session.save(() => {
-            res.redirect('/')
+            res.redirect(`/user/${user.id}`)  
         })
     
     } catch (error) {

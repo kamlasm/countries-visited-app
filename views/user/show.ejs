@@ -14,5 +14,7 @@
     <p>Highlights: <%= userCountry.highlights %> </p>
     <p>Traveller Tips: <%= userCountry.travellerTips %> </p>
     <img src="<%= userCountry.images %>">
+    <a href="/user/<%= user.userId %>/<%= userCountry._id %>/edit">Edit visits</a>
+    <a href="/user/<%= user.userId %>">Back to my countries</a>
 </body>
 </html>

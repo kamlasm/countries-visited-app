@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community: <%= country.name %></title>
+</head>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <h1><%= country.name %></h1>
+    <h3>Users been: <%= country.visitors.length %></h3>
+    <% country.visitors.forEach(visitor => { %>
+        <p><%= visitor.username %></p>
+    <% }) %>
+    <a href="/community">Back to Community home</a>
+</body>
+</html>

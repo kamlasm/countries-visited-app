@@ -1,7 +1,8 @@
 <nav>
     <% if (user) { %>
+        <p>Hello, <%= user.username %></p>
         <a href="/user/<%= user.userId %>">My Countries</a>
-        <a href=""> Community</a>
+        <a href="/community"> Community</a>
         <a href="/auth/sign-out"> Sign Out</a>
     <% } else { %>
         <a href="/">Home</a>
