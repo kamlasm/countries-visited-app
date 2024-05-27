@@ -3,18 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= userCountry.countryName.name %></title>
+    <title><%= country.name %></title>
 </head>
 <body>
     <%- include('../partials/nav.ejs') %>
-    <h1><%= userCountry.countryName.name %></h1>
-    <h3>Date visited: 
-    <% const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October','November', 'December'] %>
-    <%= userCountry.startDate.getDate() %> <%= monthNames[userCountry.startDate.getMonth()] %> <%= userCountry.startDate.getFullYear() %> to <%= userCountry.endDate.getDate() %> <%= monthNames[userCountry.endDate.getMonth()] %> <%= userCountry.endDate.getFullYear() %> </h3>
-    <p>Highlights: <%= userCountry.highlights %> </p>
-    <p>Traveller Tips: <%= userCountry.travellerTips %> </p>
-    <img src="<%= userCountry.images %>">
-    <a href="/user/<%= user.userId %>/<%= userCountry._id %>/edit">Edit visits</a>
-    <a href="/user/<%= user.userId %>">Back to my countries</a>
+    <h1><%= country.name %></h1>
+    <% if (visit.startDate) { %>
+        <h3>Date visited: 
+            <% const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October','November', 'December'] %>
+            <%= visit.startDate.getDate() %> <%= monthNames[visit.startDate.getMonth()] %> <%= visit.startDate.getFullYear() %> to <%= visit.endDate.getDate() %> <%= monthNames[visit.endDate.getMonth()] %> <%= visit.endDate.getFullYear() %> </h3>     
+    <% } %>
+    <% if (visit.highlights) { %>
+            <p>Highlights: <%= visit.highlights %> </p>
+    <% } %>
+    <% if (visit.travellerTips) { %>
+            <p>Traveller Tips: <%= visit.travellerTips %> </p>
+    <% } %>
+    
+    <img src="<%= visit.images %>">
+    
+    <a href="/user/<%= user._id %>/<%= country._id %>/<%= visit._id %>/edit">Edit visit</a>
+    <a href="/user/<%= user._id %>">Back to my countries</a>
 </body>
 </html>

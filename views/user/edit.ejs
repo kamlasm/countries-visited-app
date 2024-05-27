@@ -8,11 +8,11 @@
 <body>
     <%- include('../partials/nav.ejs') %>
     <h1>Edit details!</h1>
-    <form action="/user/<%= user.userId %>/<%= userCountry._id %>/edit?_method=PUT" method="POST">
+    <form action="/user/<%= user.userId %>/<%= currentCountry._id %>/<%= visit._id %>/edit?_method=PUT" method="POST">
         <label for="countryName">Country: </label>
         <select name="countryName" disabled>
-            <% country.forEach(country => { %>
-                <% if (country.name === userCountry.countryName.name) { %>
+            <% allCountries.forEach(country => { %>
+                <% if (country.name === currentCountry.name) { %>
                     <option value="<%= country.name %>" selected="selected"><%= country.name %></option>
                 <% } else { %>
                     <option value="<%= country.name %>"><%= country.name %></option>
@@ -22,26 +22,34 @@
         <p>Edit details about the visit (optional)</p>
         <div>
             <label for="startDate">Start Date: </label>
+            <% if (visit.startDate) { %>
             <input type="date" name="startDate" value="<%= startDate %>">
+            <% } else { %>
+            <input type="date" name="startDate" value="">
+            <% } %>
         </div>
         <div>
             <label for="endDate">End Date: </label>
+            <% if (visit.endDate) { %>
             <input type="date" name="endDate" value="<%= endDate %>">
+            <% } else { %>
+                <input type="date" name="startDate" value="">
+                <% } %>
         </div>
         <div>
             <label for="highlights">Highlights: </label>
-            <textarea type="text" name="highlights"><%= userCountry.highlights %></textarea>
+            <textarea type="text" name="highlights"><%= visit.highlights %></textarea>
         </div>
         <div>
             <label for="travellerTips">Traveller Tips: </label>
-            <textarea type="text" name="travellerTips"><%= userCountry.travellerTips %></textarea>
+            <textarea type="text" name="travellerTips"><%= visit.travellerTips %></textarea>
         </div>
         <div>
             <label for="images">Photos: </label>
             <input type="file" name="images">
         </div>       
         <button type="submit">Edit visit details</button>
-        <a href="/user/<%= user.userId %>/<%= userCountry._id %>">Back to <%= userCountry.countryName.name %></a>
+        <a href="/user/<%= user.userId %>/<%= currentCountry._id %>">Back to <%= currentCountry.name %></a>
     </form>
 </body>
 </html>

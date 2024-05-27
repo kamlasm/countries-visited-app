@@ -12,6 +12,14 @@
     <% country.visitors.forEach(visitor => { %>
         <p><%= visitor.username %></p>
     <% }) %>
+    <h3>Users' highlights:</h3>
+    <% country.visits.forEach(visit => { %>
+        <p><%= visit.highlights %></p>
+    <% }) %>
+    <h3>Users' travel tips:</h3>
+    <% country.visits.forEach(visit => { %>
+        <p><%= visit.travellerTips %></p>
+    <% }) %>
     <a href="/community">Back to Community home</a>
 </body>
 </html>

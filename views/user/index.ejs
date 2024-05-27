@@ -19,7 +19,7 @@
             <a href="/user/<%= user.userId %>/new-country">Add a country</a>
         </button>
             <% userCountries.forEach(userCountry => { %>
-             <li><%= userCountry.countryName.name %></li>
+             <li><%= userCountry.name %></li>
              <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
              <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST"><button>Delete</button></form>
             <% }) %>

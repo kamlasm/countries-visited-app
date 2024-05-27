@@ -3,6 +3,7 @@ const router = express.Router()
 
 const User = require('../models/user.js')
 const Country = require('../models/country.js')
+const Visit = require('../models/visit.js')
 
 router.get('/', async (req, res) => {
     try {
@@ -26,12 +27,14 @@ router.get('/', async (req, res) => {
 
 router.get('/:countryId', async (req, res) => {
     try {
-        const country = await Country.findById(req.params.countryId).populate('visitors')
-        
-        country.visitors.forEach(async (visitor) => {
-            const user = await User.findById(visitor._id)
-
-        })
+        const country = await Country.findById(req.params.countryId).populate('visitors').populate('visits')
+        console.log(country)
+        // country.visitors.forEach(async (visitor) => {
+        //     const user = await User.findById(visitor._id)
+        //     const visit = await Visit.findOne({countryName: `${country._id}`, createdBy: `${user._id}`})
+        //     console.log(user)
+        //     console.log(visit)
+        // })
         
       
         res.render('community/show.ejs', {country,})
