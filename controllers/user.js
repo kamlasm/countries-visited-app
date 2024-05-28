@@ -16,6 +16,7 @@ router.get('/:userId', async (req, res) => {
     try {
         const user = await User.findById(req.params.userId).populate({path: 'countriesVisited'})
         const userCountries = user.countriesVisited
+        console.log(userCountries)
         userCountries.sort((a, b) => {
             if (a.name < b.name) {
                 return -1
