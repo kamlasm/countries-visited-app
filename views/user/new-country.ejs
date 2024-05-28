@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a country</title>
+</head>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <h1>Add a new country visited!</h1>
+    <form action="/user/<%= user.userId %>/new-country" method="POST">
+        <label for="countryName">Country: </label>
+        <select name="countryName">
+            <% allCountries.forEach(country => { %>
+                <option value="<%= country.name %>"><%= country.name %></option>
+            <% }) %>
+        </select>
+        <button>Add country</button>
+    </form>
+
+    <a href="/user/<%= user.userId %>">Back to my countries</a>
+</body>
+</html>

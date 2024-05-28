@@ -27,16 +27,11 @@ router.get('/', async (req, res) => {
 
 router.get('/:countryId', async (req, res) => {
     try {
-        const country = await Country.findById(req.params.countryId).populate('visitors').populate('visits')
-        console.log(country)
-        // country.visitors.forEach(async (visitor) => {
-        //     const user = await User.findById(visitor._id)
-        //     const visit = await Visit.findOne({countryName: `${country._id}`, createdBy: `${user._id}`})
-        //     console.log(user)
-        //     console.log(visit)
-        // })
-        
-      
+        const country = await Country.findById(req.params.countryId).populate('visitors').populate({
+            path: 'visits', 
+            populate: {path: 'createdBy'}
+        })
+
         res.render('community/show.ejs', {country,})
     } catch (error) {
         res.render('error.ejs', { msg: error.message })

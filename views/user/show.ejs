@@ -8,21 +8,30 @@
 <body>
     <%- include('../partials/nav.ejs') %>
     <h1><%= country.name %></h1>
-    <% if (visit.startDate) { %>
-        <h3>Date visited: 
-            <% const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October','November', 'December'] %>
-            <%= visit.startDate.getDate() %> <%= monthNames[visit.startDate.getMonth()] %> <%= visit.startDate.getFullYear() %> to <%= visit.endDate.getDate() %> <%= monthNames[visit.endDate.getMonth()] %> <%= visit.endDate.getFullYear() %> </h3>     
+
+    <% if (visits.length !== 0) { %>
+        <% visits.forEach(visit => { %>
+            <% if (visit.startDate) { %>
+                <h3>Date visited: 
+                <% const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October','November', 'December'] %>
+                <%= visit.startDate.getDate() %> <%= monthNames[visit.startDate.getMonth()] %> <%= visit.startDate.getFullYear() %> to <%= visit.endDate.getDate() %> <%= monthNames[visit.endDate.getMonth()] %> <%= visit.endDate.getFullYear() %> </h3>     
+            <% } %>
+            <% if (visit.highlights) { %>
+                <p>Highlights: <%= visit.highlights %> </p>
+            <% } %>
+            <% if (visit.travellerTips) { %>
+                <p>Traveller Tips: <%= visit.travellerTips %> </p>
+            <% } %>           
+
+            <p>
+                <a href="/user/<%= user._id %>/<%= country._id %>/<%= visit._id %>/edit-visit">Edit visit details</a>
+                <form action="/user/<%= user._id %>/<%= country._id %>/<%= visit._id %>/?_method=DELETE" method="POST"><button>Delete visit</button></form>
+            </p>
+        <% }) %>
     <% } %>
-    <% if (visit.highlights) { %>
-            <p>Highlights: <%= visit.highlights %> </p>
-    <% } %>
-    <% if (visit.travellerTips) { %>
-            <p>Traveller Tips: <%= visit.travellerTips %> </p>
-    <% } %>
-    
-    <img src="<%= visit.images %>">
-    
-    <a href="/user/<%= user._id %>/<%= country._id %>/<%= visit._id %>/edit">Edit visit</a>
-    <a href="/user/<%= user._id %>">Back to my countries</a>
+        
+    <p><a href="/user/<%= user._id %>/<%= country._id %>/new-visit">Add a visit</a></p>
+    <p><a href="/user/<%= user._id %>">Back to my countries</a></p>     
+
 </body>
 </html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a visit</title>
+</head>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <h1>Add a visit!</h1>
+    <form action="/user/<%= user.userId %>/<%= currentCountry._id %>/new-visit" method="POST">
+        <label for="countryName">Country: </label>
+        <select name="countryName" disabled>
+            <% allCountries.forEach(country => { %>
+                <% if (country.name === currentCountry.name) { %>
+                    <option value="<%= country.name %>" selected="selected"><%= country.name %></option>
+                <% } else { %>
+                    <option value="<%= country.name %>"><%= country.name %></option>
+                <% } %>
+            <% }) %>
+        </select>
+        <p>Add details about the visit</p>
+        <div>
+            <label for="startDate">Start Date: </label>
+            <input type="date" name="startDate" required>
+        </div>
+        <div>
+            <label for="endDate">End Date: </label>
+            <input type="date" name="endDate" required>
+        </div>
+        <div>
+            <label for="highlights">Highlights (optional): </label>
+            <textarea type="text" name="highlights"></textarea>
+        </div>
+        <div>
+            <label for="travellerTips">Traveller Tips (optional): </label>
+            <textarea type="text" name="travellerTips"></textarea>
+        </div>
+        <div>
+            <label for="images">Photos (optional): </label>
+            <input type="file" name="images">
+        </div>       
+        <button type="submit">Add visit</button>
+    </form>
+    <a href="/user/<%= user.userId %>/<%= currentCountry._id %>">Back to <%= currentCountry.name %></a>
+</body>
+</html>

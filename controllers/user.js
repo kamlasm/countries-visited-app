@@ -32,28 +32,21 @@ router.get('/:userId', async (req, res) => {
 })
 
 router.get('/:userId/new-country', (req,res) => {
-    res.render('user/new.ejs')
+    res.render('user/new-country.ejs')
 })
 
 router.post('/:userId/new-country', async (req, res) => {
     try {
         const user = await User.findById(req.params.userId)
         const country = await Country.findOne({name: `${req.body.countryName}`})
-        
-        req.body.countryName = country.id
-        req.body.createdBy = user.id
-
-        const newVisit = await Visit.create(req.body)
 
         user.countriesVisited.push(country.id)
-        user.visitsMade.push(newVisit.id)
         await user.save()
         
         country.visitors.push(user.id)
-        country.visits.push(newVisit.id)
         await country.save()
 
-        res.redirect(`/user/${req.params.userId}`)
+        res.redirect(`/user/${req.params.userId}/${country.id}`)
     } catch (error) {
         res.render('error.ejs', { msg: error.message })
     }
@@ -63,20 +56,20 @@ router.delete('/:userId/:countryId', async (req, res) => {
     try {
         const user = await User.findById(req.params.userId)
         const country = await Country.findById(req.params.countryId)
-        const visit = await Visit.findOne({countryName: `${country._id}`, createdBy: `${user._id}`})
-        
+        const visits = await Visit.find({countryName: `${country._id}`, createdBy: `${user._id}`})
+       
+        visits.forEach(async (visit) => {
+            user.visitsMade.pull(visit._id)
+            country.visits.pull(visit._id)
+            await visit.deleteOne()
+        })
+
         user.countriesVisited.pull(country._id)
-        user.visitsMade.pull(visit._id)
-        await user.save()
-        console.log(user)     
-
         country.visitors.pull(user._id)
-        country.visits.pull(visit._id)
-        await country.save()
-        console.log(country)
-
-        await visit.deleteOne()
         
+        await user.save()
+        await country.save()
+       
         res.redirect(`/user/${req.params.userId}`)
     } catch (error) {
         res.render('error.ejs', { msg: error.message })
@@ -89,41 +82,62 @@ router.get('/:userId/:countryId', async (req, res) => {
 
         const country = await Country.findById(`${req.params.countryId}`)
 
-        const visit = await Visit.findOne({countryName: `${country._id}`, createdBy: `${user._id}`})
+        const visits = await Visit.find({countryName: `${country._id}`, createdBy: `${user._id}`}).sort({startDate: 'desc'})
 
-        res.render('user/show.ejs', {user, country, visit})
+        res.render('user/show.ejs', {user, country, visits})
     } catch (error) {
         res.render('error.ejs', { msg: error.message })
     }
 })
 
-router.get('/:userId/:countryId/:visitId/edit', async (req, res) => {
+router.get('/:userId/:countryId/new-visit', async (req, res) => {
+    try {
+        const currentCountry = await Country.findById(`${req.params.countryId}`)
+
+        res.render('user/new-visit.ejs', {currentCountry}) 
+    } catch (error) {
+        res.render('error.ejs', { msg: error.message })
+    }  
+})
+
+router.post('/:userId/:countryId/new-visit', async (req, res) => {
+    try {
+        const country = await Country.findById(`${req.params.countryId}`)
+        const user = await User.findById(req.params.userId)
+
+        req.body.countryName = country.id
+        req.body.createdBy = user.id
+
+        const newVisit = await Visit.create(req.body)
+
+        user.visitsMade.push(newVisit.id)
+        await user.save()
+        
+        country.visits.push(newVisit.id)
+        await country.save()
+
+        res.redirect(`/user/${req.params.userId}/${req.params.countryId}`)
+    } catch (error) {
+        res.render('error.ejs', { msg: error.message })
+    }  
+})
+
+router.get('/:userId/:countryId/:visitId/edit-visit', async (req, res) => {
     try {
         const currentCountry = await Country.findById(`${req.params.countryId}`)
         
         const visit = await Visit.findById(`${req.params.visitId}`)
-        
-        let formattedStartDate
-        let formattedEndDate
-        if (visit.startDate) {
-            formattedStartDate = convertDate(visit.startDate)
-        } else {
-            formattedStartDate = visit.startDate
-        }
 
-        if (visit.endDate) {
-            formattedEndDate = convertDate(visit.endDate)
-        } else {
-            formattedEndDate = visit.endDate
-        }
-    
-        res.render('user/edit.ejs', {currentCountry, visit, startDate: formattedStartDate, endDate: formattedEndDate})
+        const formattedStartDate = convertDate(visit.startDate)
+        const formattedEndDate = convertDate(visit.endDate)
+
+        res.render('user/edit-visit.ejs', {currentCountry, visit, startDate: formattedStartDate, endDate: formattedEndDate})
     } catch (error) {
         res.render('error.ejs', { msg: error.message })
     }
 })
 
-router.put('/:userId/:countryId/:visitId/edit', async (req, res) => {
+router.put('/:userId/:countryId/:visitId/edit-visit', async (req, res) => {
     try {
         const updatedVisit = await Visit.findByIdAndUpdate(req.params.visitId, req.body, {new: true})
         
@@ -131,6 +145,26 @@ router.put('/:userId/:countryId/:visitId/edit', async (req, res) => {
     } catch (error) {
         res.render('error.ejs', { msg: error.message })
     }  
+})
+
+router.delete('/:userId/:countryId/:visitId', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.userId)
+        const country = await Country.findById(req.params.countryId)
+        const visit = await Visit.findById(req.params.visitId)
+        
+        user.visitsMade.pull(visit._id)
+        await user.save()
+
+        country.visits.pull(visit._id)
+        await country.save()
+
+        await visit.deleteOne()
+        
+        res.redirect(`/user/${req.params.userId}/${req.params.countryId}`)
+    } catch (error) {
+        res.render('error.ejs', { msg: error.message })
+    }
 })
 
 module.exports = router

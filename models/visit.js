@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const visitSchema = new mongoose.Schema({
     countryName: { type: mongoose.Schema.ObjectId, ref: 'Country', required: true },
-    startDate: { type: Date, required: false },
-    endDate: { type: Date, required: false },
+    startDate: { type: Date, required: true },
+    endDate: { type: Date, required: true },
     highlights: { type: String, required: false },
     travellerTips: { type: String, required: false },
     images: [{ type: String, required: false }],
