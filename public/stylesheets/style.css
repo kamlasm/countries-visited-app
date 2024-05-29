@@ -79,7 +79,7 @@ button {
     display: inline;
 }
 
-#add-visit {
+#add-visit, #save-settings {
     margin-top: 20px;
 }
 
@@ -149,6 +149,12 @@ nav > p {
 }
 
 /* media queries */
+@media (max-width: 2400px) {
+    #settings {
+        max-width: 400px;
+    }
+}
+
 @media (max-width: 1600px) {
     .main-div {
         max-width: 400px;
@@ -156,7 +162,8 @@ nav > p {
 }
 
 @media (max-width: 1000px) {
-    .main-div {
+    .main-div, #settings {
         max-width: 200px;
     }
 }
+

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
+    <title>Settings</title>
+  </head>
+  <body>
+    <%- include('../partials/nav.ejs') %>
+    <div class="main-div" id="settings">
+        <h1>Settings</h1>
+        <h3>Data sharing</h3>
+        <p>Are you happy for your username, highlights and traveller tips to be shared with other users on the 'Community' pages?</p>
+        <form action="/user/<%= user.userId %>/settings?_method=PUT" method="POST">
+            <div>
+                <label for="shareData" class="switch">Yes</label>
+                <input type="radio" name="shareData" value="true" 
+                <% if (shareData) { %>
+                    checked
+                <% } %>
+                >
+                <label for="shareData" class="switch">No</label>
+                <input type="radio" name="shareData" value="false"
+                <% if (!shareData) { %>
+                    checked
+                <% } %>
+                >
+            </div>
+            <button type="submit" id="save-settings">Save</button>
+        </form>
+    </div>
+  </body>
+</html>

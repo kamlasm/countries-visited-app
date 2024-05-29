@@ -1,9 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const User = require('../models/user.js')
-const Country = require('../models/country.js')
 const Visit = require('../models/visit.js')
+const Country = require('../models/country.js')
 
 router.get('/', async (req, res) => {
     try {
@@ -27,12 +26,40 @@ router.get('/', async (req, res) => {
 
 router.get('/:countryId', async (req, res) => {
     try {
-        const country = await Country.findById(req.params.countryId).populate('visitors').populate({
-            path: 'visits', 
-            populate: {path: 'createdBy'}
+        const country = await Country.findById(req.params.countryId).populate({
+            path: 'visitors',
+            match: { shareData: true },
+            select: 'username',
+        })
+        const visitorsDataOn = country.visitors.sort((a, b) => {
+            if (a.username < b.username) {
+                return -1
+            }
+            if (a.username > b.username) {
+                return 1
+            }
+            return 0
         })
 
-        res.render('community/show.ejs', {country,})
+        const visits = await Visit.find({countryName: `${country._id}`}).populate({
+            path: 'createdBy',
+            match: { shareData: true },
+            select: 'username'
+        })
+
+        const visitsDataOn = visits.filter(visit => {
+            return visit.createdBy
+        }).sort((a, b) => {
+            if (a.createdBy.username < b.createdBy.username) {
+                return -1
+            }
+            if (a.createdBy.username > b.createdBy.username) {
+                return 1
+            }
+            return 0
+        })
+
+        res.render('community/show.ejs', {country, visitorsDataOn, visitsDataOn})
     } catch (error) {
         res.render('error.ejs', { msg: error.message })
     }

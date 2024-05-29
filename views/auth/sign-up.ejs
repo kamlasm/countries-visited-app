@@ -8,24 +8,26 @@
 </head>
 <body>
     <%- include ('../partials/nav.ejs') %>
-    <h1>Create a new account!</h1>
-    <% if (typeof msg !== 'undefined') { %>
-        <p> <%= msg %> </p>
-    <% } %>
-    <form action="/auth/sign-up" method="POST" class="auth-forms">
-      <div>
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required />
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required />
-      </div>
-      <div>
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" name="confirmPassword" id="confirmPassword" required />
-      </div>
-      <button type="submit">Sign up</button>
-    </form>   
+    <div class="main-div">
+      <h1>Create a new account!</h1>
+      <% if (typeof msg !== 'undefined') { %>
+          <p> <%= msg %> </p>
+      <% } %>
+      <form action="/auth/sign-up" method="POST" class="auth-forms">
+        <div>
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" required />
+        </div>
+        <div>
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" required />
+        </div>
+        <div>
+          <label for="confirmPassword">Confirm Password:</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" required />
+        </div>
+        <button type="submit">Sign up</button>
+      </form>
+  </div>   
 </body>
 </html>

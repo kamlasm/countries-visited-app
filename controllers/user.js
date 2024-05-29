@@ -16,7 +16,7 @@ router.get('/:userId', async (req, res) => {
     try {
         const user = await User.findById(req.params.userId).populate({path: 'countriesVisited'})
         const userCountries = user.countriesVisited
-        console.log(userCountries)
+
         userCountries.sort((a, b) => {
             if (a.name < b.name) {
                 return -1
@@ -52,6 +52,25 @@ router.post('/:userId/new-country', async (req, res) => {
         await country.save()
 
         res.redirect(`/user/${req.params.userId}/${country.id}`)
+    } catch (error) {
+        res.render('error.ejs', { msg: error.message })
+    }
+})
+
+router.get('/:userId/settings', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.userId)
+        const shareData = user.shareData
+        res.render('user/settings.ejs', {shareData,})
+    } catch (error) {
+        res.render('error.ejs', { msg: error.message })
+    }
+})
+
+router.put('/:userId/settings', async (req, res) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.userId, req.body, {new: true})
+        res.redirect(`/user/${req.params.userId}/settings`)
     } catch (error) {
         res.render('error.ejs', { msg: error.message })
     }
