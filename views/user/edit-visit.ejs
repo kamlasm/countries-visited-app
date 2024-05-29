@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     <title>Edit a country</title>
 </head>
 <body>
     <%- include('../partials/nav.ejs') %>
     <h1>Edit details!</h1>
-    <form action="/user/<%= user.userId %>/<%= currentCountry._id %>/<%= visit._id %>/edit-visit?_method=PUT" method="POST">
+    <form action="/user/<%= user.userId %>/<%= currentCountry._id %>/<%= visit._id %>/edit-visit?_method=PUT" method="POST" class="visit-forms">
         <label for="countryName">Country: </label>
         <select name="countryName" disabled>
             <% allCountries.forEach(country => { %>
@@ -19,7 +20,7 @@
                 <% } %>
             <% }) %>
         </select>
-        <p>Edit details about the visit</p>
+        <p><strong>Edit details about the visit:</strong></p>
         <div>
             <label for="startDate">Start Date: </label>
             <input type="date" name="startDate" value="<%= startDate %>" required>
@@ -28,11 +29,11 @@
             <label for="endDate">End Date: </label>
             <input type="date" name="endDate" value="<%= endDate %>" required>
         </div>
-        <div>
+        <div class="textareas">
             <label for="highlights">Highlights: </label>
             <textarea type="text" name="highlights"><%= visit.highlights %></textarea>
         </div>
-        <div>
+        <div class="textareas">
             <label for="travellerTips">Traveller Tips: </label>
             <textarea type="text" name="travellerTips"><%= visit.travellerTips %></textarea>
         </div>
@@ -41,7 +42,7 @@
             <input type="file" name="images">
         </div>       
         <button type="submit">Update</button>
-        <a href="/user/<%= user.userId %>/<%= currentCountry._id %>">Back to <%= currentCountry.name %></a>
+        <p><a href="/user/<%= user.userId %>/<%= currentCountry._id %>">Back to <%= currentCountry.name %></a></p>
     </form>
 </body>
 </html>

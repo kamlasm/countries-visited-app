@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     <title>Community: <%= country.name %></title>
 </head>
 <body>
     <%- include('../partials/nav.ejs') %>
+    <div class="main-div">
     <h1><%= country.name %></h1>
 
     <h3>Users been: <%= country.visitors.length %></h3>
@@ -14,20 +16,21 @@
         <p><%= visitor.username %></p>
     <% }) %>
 
-    <h3>Users' highlights:</h3>
+    <h3>Users' highlights</h3>
     <% country.visits.forEach(visit => { %>
         <% if (visit.highlights) { %>
-            <p><%= visit.createdBy.username %>: <%= visit.highlights %></p>
+            <p><strong><%= visit.createdBy.username %>:</strong> <%= visit.highlights %></p>
         <% } %>  
     <% }) %>
 
-    <h3>Users' travel tips:</h3>
+    <h3>Users' travel tips</h3>
     <% country.visits.forEach(visit => { %>
         <% if (visit.travellerTips) { %>
-            <p><%= visit.createdBy.username %>: <%= visit.travellerTips %></p>
+            <p><strong><%= visit.createdBy.username %>:</strong> <%= visit.travellerTips %></p>
         <% } %>  
     <% }) %>
 
-    <a href="/community">Back to Community home</a>
+    <p><a href="/community">Back to Community home</a></p>
+    </div>
 </body>
 </html>

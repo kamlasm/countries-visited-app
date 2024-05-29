@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     <title>Add a country</title>
 </head>
 <body>
     <%- include('../partials/nav.ejs') %>
     <h1>Add a new country visited!</h1>
-    <form action="/user/<%= user.userId %>/new-country" method="POST">
+    <form action="/user/<%= user.userId %>/new-country" method="POST" class="forms">
         <label for="countryName">Country: </label>
         <select name="countryName">
             <% allCountries.forEach(country => { %>
@@ -18,6 +19,6 @@
         <button>Add country</button>
     </form>
 
-    <a href="/user/<%= user.userId %>">Back to my countries</a>
+    <p><a href="/user/<%= user.userId %>">Back to my countries</a></p>
 </body>
 </html>

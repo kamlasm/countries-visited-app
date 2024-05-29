@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
   })
   
   app.get("*", (req, res) => {
-    res.send("Page not found!")
+    res.render('error.ejs', {msg:"Page not found!"})
   })
 
 app.listen(port, () => {

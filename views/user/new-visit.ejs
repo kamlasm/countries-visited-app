@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     <title>Add a visit</title>
 </head>
 <body>
     <%- include('../partials/nav.ejs') %>
     <h1>Add a visit!</h1>
-    <form action="/user/<%= user.userId %>/<%= currentCountry._id %>/new-visit" method="POST">
+    <form action="/user/<%= user.userId %>/<%= currentCountry._id %>/new-visit" method="POST" class="visit-forms">
         <label for="countryName">Country: </label>
         <select name="countryName" disabled>
             <% allCountries.forEach(country => { %>
@@ -19,7 +20,7 @@
                 <% } %>
             <% }) %>
         </select>
-        <p>Add details about the visit</p>
+        <p><strong>Add details about the visit:</strong></p>
         <div>
             <label for="startDate">Start Date: </label>
             <input type="date" name="startDate" required>
@@ -28,11 +29,11 @@
             <label for="endDate">End Date: </label>
             <input type="date" name="endDate" required>
         </div>
-        <div>
+        <div class="textareas">
             <label for="highlights">Highlights (optional): </label>
             <textarea type="text" name="highlights"></textarea>
         </div>
-        <div>
+        <div class="textareas">
             <label for="travellerTips">Traveller Tips (optional): </label>
             <textarea type="text" name="travellerTips"></textarea>
         </div>
@@ -42,6 +43,6 @@
         </div>       
         <button type="submit">Add visit</button>
     </form>
-    <a href="/user/<%= user.userId %>/<%= currentCountry._id %>">Back to <%= currentCountry.name %></a>
+    <p><a href="/user/<%= user.userId %>/<%= currentCountry._id %>">Back to <%= currentCountry.name %></a></p>
 </body>
 </html>

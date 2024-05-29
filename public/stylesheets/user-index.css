@@ -1,0 +1,67 @@
+body {
+    background: radial-gradient(#d9eef1, #71bdca);
+    margin: 0;
+}
+
+#stats-div {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+#map-div {
+    width: 100%;
+    background-color: #387ab5;
+    padding: 5px 0;
+}
+
+#map {
+    background-color: #387ab5;
+    width: 100%;
+    height: 100%;   
+}
+
+.visited {
+    fill: #35a761;
+}
+
+#country-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
+    max-height: 400px;
+}
+
+#country-list > li {
+    font-weight: bold;
+}
+
+li > a {
+    font-weight: normal;    
+}
+
+#delete-form {
+    margin-top: 5px;
+    margin-left: 0;
+} 
+
+.del-country-btn {
+    background-color: var(--main-colour);
+    border-color: var(--third-colour);
+    color: var(--third-colour);
+    font-size: 0.9em;
+    padding: 2.5px 5px;    
+}
+
+@media (max-width: 1000px) {
+    #country-list {
+        max-height: 500px;
+    }
+}
+
+@media (max-width: 600px) {
+    #country-list {
+        max-height: unset;
+    }
+}

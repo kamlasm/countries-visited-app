@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     <title>Community</title>
 </head>
 <body>
     <%- include('../partials/nav.ejs') %>
+    <div class="main-div">
     <h1>Community</h1>
     <h3>Top countries visited:</h3>
-    <p>1. <%= mostVisitedCountries[0].name %> - <%= mostVisitedCountries[0].visitors.length %> users</p>
-    <p>2. <%= mostVisitedCountries[1].name %> - <%= mostVisitedCountries[1].visitors.length %> users</p>
-    <p>3. <%= mostVisitedCountries[2].name %> - <%= mostVisitedCountries[2].visitors.length %> users</p>
+    <p><strong>1. <%= mostVisitedCountries[0].name %></strong> - <%= mostVisitedCountries[0].visitors.length %> users</p>
+    <p><strong>2. <%= mostVisitedCountries[1].name %> </strong>- <%= mostVisitedCountries[1].visitors.length %> users</p>
+    <p><strong>3. <%= mostVisitedCountries[2].name %> </strong>- <%= mostVisitedCountries[2].visitors.length %> users</p>
     <h3>All countries visited by users:</h3>
     <ul>
         <% countries.forEach(country => { %>
@@ -20,6 +22,6 @@
             <% } %>           
         <% }) %>
     </ul>
-
+    </div>
 </body>
 </html>

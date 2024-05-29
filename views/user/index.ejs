@@ -4,31 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/user-index.css" type="text/css">
     <script src="/js/app.js" defer></script>
     <title>My Countries</title>
 </head>
 <body>
     <%- include('../partials/nav.ejs') %>
-    <h1>My Countries</h1>
-    <%- include ("../world.svg") %>
-    <div>
-        <h3>Stats</h3>
-        <p>Total countries: <span><%= userCountries.length %></span></p>
-        <p>World visited: <span><%= Math.floor(userCountries.length / 195 * 100) %></span>%</p>
-    </div>
+    <h1>My Countries</h1>    
+    <div id="stats-div">
+        <h2>Total countries: <%= userCountries.length %></h2>
+        <h2>World visited: <%= Math.floor(userCountries.length / 195 * 100) %>%</h2>
+    </div>    
+    <div id="map-div">
+        <%- include ("../world.svg") %>
+    </div>    
     <div>
         <h3>Countries been</h3>
-        <button>
-            <a href="/user/<%= user.userId %>/new-country">Add a country</a>
+        <button class="add-btns"> 
+            <a href="/user/<%= user.userId %>/new-country" >Add a country</a>
         </button>
-            <% userCountries.forEach(userCountry => { %>
-             <li class="<%= userCountry.countryCode %>"><%= userCountry.name %></li>
-             <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
-             <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST"><button>Delete</button></form>
-            <% }) %>
-        <ul>
-
-        </ul>
+        <div>
+            <ul id="country-list">
+                <% userCountries.forEach(userCountry => { %>
+                <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
+                    <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
+                    <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button class="del-country-btn">Delete</button></form>
+                </li>
+                <% }) %>
+            </ul>
+        </div>
     </div>
 </body>
 </html>

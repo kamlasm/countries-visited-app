@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     <title>Sign Up</title>
 </head>
 <body>
@@ -11,18 +12,19 @@
     <% if (typeof msg !== 'undefined') { %>
         <p> <%= msg %> </p>
     <% } %>
-    <form action="/auth/sign-up" method="POST">
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username" required />
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" required />
-      <label for="confirmPassword">Confirm Password:</label>
-      <input 
-        type="password"
-        name="confirmPassword"
-        id="confirmPassword"
-        required 
-      />
+    <form action="/auth/sign-up" method="POST" class="auth-forms">
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required />
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required />
+      </div>
+      <div>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" required />
+      </div>
       <button type="submit">Sign up</button>
     </form>   
 </body>

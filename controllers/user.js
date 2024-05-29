@@ -41,6 +41,10 @@ router.post('/:userId/new-country', async (req, res) => {
         const user = await User.findById(req.params.userId)
         const country = await Country.findOne({name: `${req.body.countryName}`})
 
+        if (user.countriesVisited.includes(country.id)) {
+            throw new Error('You have already logged this country!')
+        }
+
         user.countriesVisited.push(country.id)
         await user.save()
         
@@ -85,7 +89,7 @@ router.get('/:userId/:countryId', async (req, res) => {
 
         const visits = await Visit.find({countryName: `${country._id}`, createdBy: `${user._id}`}).sort({startDate: 'desc'})
 
-        res.render('user/show.ejs', {user, country, visits})
+        res.render('user/show.ejs', {country, visits})
     } catch (error) {
         res.render('error.ejs', { msg: error.message })
     }
