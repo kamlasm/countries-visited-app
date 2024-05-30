@@ -37,10 +37,6 @@
             <label for="travellerTips">Traveller Tips: </label>
             <textarea type="text" name="travellerTips"><%= visit.travellerTips %></textarea>
         </div>
-        <div>
-            <label for="images">Photos: </label>
-            <input type="file" name="images">
-        </div>       
         <button type="submit">Update</button>
         <p><a href="/user/<%= user.userId %>/<%= currentCountry._id %>">Back to <%= currentCountry.name %></a></p>
     </form>

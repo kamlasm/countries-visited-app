@@ -22,6 +22,9 @@
             <p><strong><%= visit.createdBy.username %>:</strong> <%= visit.highlights %></p>
         <% } %>  
     <% }) %>
+    <% if (visitsDataOn.every(visit => { return !visit.highlights })) { %>
+        <p><em>No users have shared highlights.</em></p>
+    <% } %>
 
     <h3>Users' travel tips</h3>
     <% visitsDataOn.forEach(visit => { %>
@@ -29,6 +32,9 @@
             <p><strong><%= visit.createdBy.username %>:</strong> <%= visit.travellerTips %></p>
         <% } %>  
     <% }) %>
+    <% if (visitsDataOn.every(visit => { return !visit.travellerTips })) { %>
+        <p><em>No users have shared travel tips.</em></p>
+    <% } %>
 
     <p><a href="/community">Back to Community home</a></p>
     </div>

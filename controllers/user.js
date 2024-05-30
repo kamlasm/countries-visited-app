@@ -5,6 +5,8 @@ const User = require('../models/user.js')
 const Country = require('../models/country.js')
 const Visit = require('../models/visit.js')
 
+const isSignedIn = require('../middleware/is-signed-in.js')
+
 function convertDate(date) {
     const d = String(date.getDate()).padStart(2, '0')
     const m = String(date.getMonth() + 1).padStart(2, '0')
@@ -12,7 +14,7 @@ function convertDate(date) {
     return y + '-' + m + '-' + d
 }
 
-router.get('/:userId', async (req, res) => {
+router.get('/:userId', isSignedIn, async (req, res) => {
     try {
         const user = await User.findById(req.params.userId).populate({path: 'countriesVisited'})
         const userCountries = user.countriesVisited
@@ -32,11 +34,11 @@ router.get('/:userId', async (req, res) => {
     }
 })
 
-router.get('/:userId/new-country', (req,res) => {
+router.get('/:userId/new-country', isSignedIn, (req,res) => {
     res.render('user/new-country.ejs')
 })
 
-router.post('/:userId/new-country', async (req, res) => {
+router.post('/:userId/new-country', isSignedIn, async (req, res) => {
     try {
         const user = await User.findById(req.params.userId)
         const country = await Country.findOne({name: `${req.body.countryName}`})
@@ -57,7 +59,7 @@ router.post('/:userId/new-country', async (req, res) => {
     }
 })
 
-router.get('/:userId/settings', async (req, res) => {
+router.get('/:userId/settings', isSignedIn, async (req, res) => {
     try {
         const user = await User.findById(req.params.userId)
         const shareData = user.shareData
@@ -67,7 +69,7 @@ router.get('/:userId/settings', async (req, res) => {
     }
 })
 
-router.put('/:userId/settings', async (req, res) => {
+router.put('/:userId/settings', isSignedIn, async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.userId, req.body, {new: true})
         res.redirect(`/user/${req.params.userId}/settings`)
@@ -76,7 +78,7 @@ router.put('/:userId/settings', async (req, res) => {
     }
 })
 
-router.delete('/:userId/:countryId', async (req, res) => {
+router.delete('/:userId/:countryId', isSignedIn, async (req, res) => {
     try {
         const user = await User.findById(req.params.userId)
         const country = await Country.findById(req.params.countryId)
@@ -100,7 +102,7 @@ router.delete('/:userId/:countryId', async (req, res) => {
     }
 })
 
-router.get('/:userId/:countryId', async (req, res) => {
+router.get('/:userId/:countryId', isSignedIn, async (req, res) => {
     try {
         const user = await User.findById(req.params.userId).populate({path: 'countriesVisited'}).populate({path: 'visitsMade'})
 
@@ -114,7 +116,7 @@ router.get('/:userId/:countryId', async (req, res) => {
     }
 })
 
-router.get('/:userId/:countryId/new-visit', async (req, res) => {
+router.get('/:userId/:countryId/new-visit', isSignedIn, async (req, res) => {
     try {
         const currentCountry = await Country.findById(`${req.params.countryId}`)
 
@@ -124,7 +126,7 @@ router.get('/:userId/:countryId/new-visit', async (req, res) => {
     }  
 })
 
-router.post('/:userId/:countryId/new-visit', async (req, res) => {
+router.post('/:userId/:countryId/new-visit', isSignedIn, async (req, res) => {
     try {
         const country = await Country.findById(`${req.params.countryId}`)
         const user = await User.findById(req.params.userId)
@@ -146,7 +148,7 @@ router.post('/:userId/:countryId/new-visit', async (req, res) => {
     }  
 })
 
-router.get('/:userId/:countryId/:visitId/edit-visit', async (req, res) => {
+router.get('/:userId/:countryId/:visitId/edit-visit', isSignedIn,async (req, res) => {
     try {
         const currentCountry = await Country.findById(`${req.params.countryId}`)
         
@@ -161,7 +163,7 @@ router.get('/:userId/:countryId/:visitId/edit-visit', async (req, res) => {
     }
 })
 
-router.put('/:userId/:countryId/:visitId/edit-visit', async (req, res) => {
+router.put('/:userId/:countryId/:visitId/edit-visit', isSignedIn,async (req, res) => {
     try {
         const updatedVisit = await Visit.findByIdAndUpdate(req.params.visitId, req.body, {new: true})
         
@@ -171,7 +173,7 @@ router.put('/:userId/:countryId/:visitId/edit-visit', async (req, res) => {
     }  
 })
 
-router.delete('/:userId/:countryId/:visitId', async (req, res) => {
+router.delete('/:userId/:countryId/:visitId', isSignedIn, async (req, res) => {
     try {
         const user = await User.findById(req.params.userId)
         const country = await Country.findById(req.params.countryId)

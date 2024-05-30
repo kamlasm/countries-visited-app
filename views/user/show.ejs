@@ -9,32 +9,32 @@
 <body>
     <%- include('../partials/nav.ejs') %>
     <div class="main-div">
-    <h1><%= country.name %></h1>
+        <h1><%= country.name %></h1>
 
-    <% if (visits.length !== 0) { %>
-        <% visits.forEach(visit => { %>
-            <% if (visit.startDate) { %>
-                <h3>Date visited: 
-                <% const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October','November', 'December'] %>
-                <%= visit.startDate.getDate() %> <%= monthNames[visit.startDate.getMonth()] %> <%= visit.startDate.getFullYear() %> to <%= visit.endDate.getDate() %> <%= monthNames[visit.endDate.getMonth()] %> <%= visit.endDate.getFullYear() %> </h3>     
-            <% } %>
-            <% if (visit.highlights) { %>
-                <p><strong>Highlights:</strong> <%= visit.highlights %> </p>
-            <% } %>
-            <% if (visit.travellerTips) { %>
-                <p><strong>Traveller Tips:</strong> <%= visit.travellerTips %> </p>
-            <% } %>           
+        <% if (visits.length !== 0) { %>
+            <% visits.forEach(visit => { %>
+                <% if (visit.startDate) { %>
+                    <h3>Date visited: 
+                    <% const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October','November', 'December'] %>
+                    <%= visit.startDate.getDate() %> <%= monthNames[visit.startDate.getMonth()] %> <%= visit.startDate.getFullYear() %> to <%= visit.endDate.getDate() %> <%= monthNames[visit.endDate.getMonth()] %> <%= visit.endDate.getFullYear() %> </h3>     
+                <% } %>
+                <% if (visit.highlights) { %>
+                    <p><strong>Highlights:</strong> <%= visit.highlights %> </p>
+                <% } %>
+                <% if (visit.travellerTips) { %>
+                    <p><strong>Traveller Tips:</strong> <%= visit.travellerTips %> </p>
+                <% } %>           
 
-            <div>
-                <button class="visit-btns edit-visit"><a href="/user/<%= user.userId %>/<%= country._id %>/<%= visit._id %>/edit-visit">Edit visit</a></button>
-                <form action="/user/<%= user.userId %>/<%= country._id %>/<%= visit._id %>/?_method=DELETE" method="POST" class="del-visit"><button class="visit-btns">Delete visit</button></form>
-            </div>
-        <% }) %>
-    <% } %>
-    <button class="add-btns" id="add-visit">
-        <a href="/user/<%= user.userId %>/<%= country._id %>/new-visit">Add a visit</a>
-    </button>
-    <p><a href="/user/<%= user.userId %>">Back to my countries</a></p>     
+                <div>
+                    <button class="visit-btns" id="edit-visit-btn"><a href="/user/<%= user.userId %>/<%= country._id %>/<%= visit._id %>/edit-visit">Edit visit</a></button>
+                    <form action="/user/<%= user.userId %>/<%= country._id %>/<%= visit._id %>/?_method=DELETE" method="POST" id="del-visit"><button class="visit-btns">Delete visit</button></form>
+                </div>
+            <% }) %>
+        <% } %>
+        <button class="add-btns" id="add-visit">
+            <a href="/user/<%= user.userId %>/<%= country._id %>/new-visit">Add a visit</a>
+        </button>
+        <p><a href="/user/<%= user.userId %>">Back to My Countries</a></p>     
     </div>
 </body>
 </html>

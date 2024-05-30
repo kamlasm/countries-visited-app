@@ -1,13 +1,13 @@
 <nav>
     <% if (user) { %>
         <p>Hello, <%= user.username %></p>
-        <div id="nav-links">
+        <div class="nav-links">
             <a href="/user/<%= user.userId %>">My Countries</a>
             <a href="/community"> Community</a>
             <a href="/user/<%= user.userId %>/settings">Settings</a>
             <a href="/auth/sign-out"> Sign Out</a>
         </div>
     <% } else { %>
-        <p><a href="/">Home</a></p>
+        <p class="nav-links"><a href="/">Home</a></p>
     <% } %>
 </nav>

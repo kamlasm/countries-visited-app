@@ -9,13 +9,14 @@ body {
     background-position: 20% 20%;
     background-repeat: no-repeat;
     margin: 0;
+    min-height: 900px;
     --main-colour: #304055;
     --second-colour: #2a834c;
     --third-colour: #fdfefd;
     color: var(--main-colour);
 }
 
-h1, h2, h3, p, form {
+h1, h2, h3, h4, p, form {
     margin-left: 10px;
 }
 
@@ -57,34 +58,7 @@ button {
     color: var(--third-colour);
 }
 
-/* show page */
-.visit-btns {
-    background-color: var(--main-colour);
-    border-color: var(--third-colour);
-    color: var(--third-colour);
-    font-size: 0.9em;
-    padding: 2.5px 5px;   
-}
-
-.edit-visit {
-    margin-left: 10px;
-}
-
-.visit-btns > a {
-    text-decoration: none;
-    color: var(--third-colour);
-}
-
-.del-visit {
-    display: inline;
-}
-
-#add-visit, #save-settings {
-    margin-top: 20px;
-}
-
 /* Forms */
-
 label {
     padding-right: 5px;
 }
@@ -125,27 +99,68 @@ nav > p {
     margin-left: 0;
 }
 
-#nav-links {
+.nav-links {
     display: flex;
     flex-direction: row;
     gap: 10px;
     padding-bottom: 10px;
 }
 
-#nav-links > a, #nav-links > a:visited {
+.nav-links > a, .nav-links > a:visited {
     color: var(--third-colour);
 }
 
 /* Home page */
-.sign-up-in {
+.sign-up-in-btns {
     margin-left: 10px;
+    margin-bottom: 10px;
     padding: 10px 15px;
     min-width: 80px;
 }
 
-.sign-up-in > a {
+.sign-up-in-btns > a, .sign-up-in-btns > a:visited {
     color: var(--third-colour);
     text-decoration: none;
+}
+
+/* user show page */
+.visit-btns {
+    background-color: var(--main-colour);
+    border-color: var(--third-colour);
+    color: var(--third-colour);
+    font-size: 0.9em;
+    padding: 2.5px 5px;   
+}
+
+.visit-btns > a {
+    text-decoration: none;
+    color: var(--third-colour);
+}
+
+#edit-visit-btn {
+    margin-left: 10px;
+}
+
+#del-visit {
+    display: inline;
+}
+
+#add-visit {
+    margin-top: 20px;
+}
+
+/* settings page */
+#save-settings {
+    margin-top: 20px;
+}
+
+/* community page */
+.comm-countries > a {
+    text-decoration: none;
+}
+
+.hide {
+    display: none;
 }
 
 /* media queries */
@@ -166,4 +181,3 @@ nav > p {
         max-width: 200px;
     }
 }
-

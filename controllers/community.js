@@ -4,7 +4,9 @@ const router = express.Router()
 const Visit = require('../models/visit.js')
 const Country = require('../models/country.js')
 
-router.get('/', async (req, res) => {
+const isSignedIn = require('../middleware/is-signed-in.js')
+
+router.get('/', isSignedIn, async (req, res) => {
     try {
         const countries = await Country.find().sort({'name': 'asc'})
         const mostVisitedCountries = countries.toSorted((a, b) => {
@@ -24,7 +26,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:countryId', async (req, res) => {
+router.get('/:countryId', isSignedIn, async (req, res) => {
     try {
         const country = await Country.findById(req.params.countryId).populate({
             path: 'visitors',

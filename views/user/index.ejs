@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/user-index.css" type="text/css">
-    <script src="/js/app.js" defer></script>
+    <script src="/js-scripts/user.js" defer></script>
     <title>My Countries</title>
 </head>
 <body>
@@ -24,11 +24,11 @@
             <a href="/user/<%= user.userId %>/new-country" >Add a country</a>
         </button>
         <div>
-            <ul id="country-list">
+            <ul id="user-countries">
                 <% userCountries.forEach(userCountry => { %>
                 <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
                     <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
-                    <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button class="del-country-btn">Delete</button></form>
+                    <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
                 </li>
                 <% }) %>
             </ul>

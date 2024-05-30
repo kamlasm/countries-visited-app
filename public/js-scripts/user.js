@@ -8,8 +8,6 @@ function colourCountries() {
     const countriesVisited = document.querySelectorAll('li')
 
     countriesVisited.forEach(country => {
-        console.log(country.innerText)
-        console.log(country.classList.value)
         
         const svgCountryEls = document.querySelectorAll(`path.${country.classList.value}`)
 

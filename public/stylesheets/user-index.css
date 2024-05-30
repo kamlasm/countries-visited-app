@@ -25,7 +25,7 @@ body {
     fill: #35a761;
 }
 
-#country-list {
+#user-countries {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -33,7 +33,7 @@ body {
     max-height: 400px;
 }
 
-#country-list > li {
+#user-countries > li {
     font-weight: bold;
 }
 
@@ -46,7 +46,7 @@ li > a {
     margin-left: 0;
 } 
 
-.del-country-btn {
+#del-country-btn {
     background-color: var(--main-colour);
     border-color: var(--third-colour);
     color: var(--third-colour);
@@ -55,13 +55,13 @@ li > a {
 }
 
 @media (max-width: 1000px) {
-    #country-list {
+    #user-countries {
         max-height: 500px;
     }
 }
 
 @media (max-width: 600px) {
-    #country-list {
+    #user-countries {
         max-height: unset;
     }
 }
