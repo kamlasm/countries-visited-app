@@ -25,60 +25,77 @@
         </button>
         <div>
             <ul id="user-countries">
-                <h4 class="continents">Africa</h4>
-                <% userCountries.forEach(userCountry => { %>
-                    <% if (userCountry.continent === 'Africa') { %>
-                        <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
-                        <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
-                        <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
-                        </li>
-                    <% } %>
-                <% }) %>
-                <h4 class="continents">Asia</h4>
-                <% userCountries.forEach(userCountry => { %>
-                    <% if (userCountry.continent === 'Asia') { %>
-                        <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
-                        <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
-                        <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
-                        </li>
-                    <% } %>
-                <% }) %>
-                <h4 class="continents">Europe</h4>
-                <% userCountries.forEach(userCountry => { %>
-                    <% if (userCountry.continent === 'Europe') { %>
-                        <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
-                        <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
-                        <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
-                        </li>
-                    <% } %>
-                <% }) %>
-                <h4 class="continents">North America</h4>
-                <% userCountries.forEach(userCountry => { %>
-                    <% if (userCountry.continent === 'North America') { %>
-                        <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
-                        <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
-                        <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
-                        </li>
-                    <% } %>
-                <% }) %>
-                <h4 class="continents">Oceania</h4>
-                <% userCountries.forEach(userCountry => { %>
-                    <% if (userCountry.continent === 'Oceania') { %>
-                        <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
-                        <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
-                        <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
-                        </li>
-                    <% } %>
-                <% }) %>
-                <h4 class="continents">South America</h4>
-                <% userCountries.forEach(userCountry => { %>
-                    <% if (userCountry.continent === 'South America') { %>
-                        <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
-                        <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
-                        <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
-                        </li>
-                    <% } %>
-                <% }) %>                                                                  
+                <% if (userCountries.some(userCountry => { return userCountry.continent === 'Africa'})) { %>
+                    <h4 class="continents">Africa</h4>
+                    <% userCountries.forEach(userCountry => { %>
+                        <% if (userCountry.continent === 'Africa') { %>
+                            <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
+                            <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
+                            <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
+                            </li>
+                        <% } %>
+                    <% }) %>                                      
+                <% } %>
+
+                <% if (userCountries.some(userCountry => { return userCountry.continent === 'Asia'})) { %>
+                    <h4 class="continents">Asia</h4>
+                    <% userCountries.forEach(userCountry => { %>
+                        <% if (userCountry.continent === 'Asia') { %>
+                            <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
+                            <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
+                            <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
+                            </li>
+                        <% } %>
+                    <% }) %>                                      
+                <% } %>
+
+                <% if (userCountries.some(userCountry => { return userCountry.continent === 'Europe'})) { %>
+                    <h4 class="continents">Europe</h4>
+                    <% userCountries.forEach(userCountry => { %>
+                        <% if (userCountry.continent === 'Europe') { %>
+                            <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
+                            <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
+                            <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
+                            </li>
+                        <% } %>
+                    <% }) %>                                      
+                <% } %>
+
+                <% if (userCountries.some(userCountry => { return userCountry.continent === 'North America'})) { %>
+                    <h4 class="continents">North America</h4>
+                    <% userCountries.forEach(userCountry => { %>
+                        <% if (userCountry.continent === 'North America') { %>
+                            <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
+                            <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
+                            <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
+                            </li>
+                        <% } %>
+                    <% }) %>                                      
+                <% } %>
+                
+                <% if (userCountries.some(userCountry => { return userCountry.continent === 'Oceania'})) { %>
+                    <h4 class="continents">Oceania</h4>
+                    <% userCountries.forEach(userCountry => { %>
+                        <% if (userCountry.continent === 'Oceania') { %>
+                            <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
+                            <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
+                            <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
+                            </li>
+                        <% } %>
+                    <% }) %>                                      
+                <% } %>
+                
+                <% if (userCountries.some(userCountry => { return userCountry.continent === 'South America'})) { %>
+                    <h4 class="continents">South America</h4>
+                    <% userCountries.forEach(userCountry => { %>
+                        <% if (userCountry.continent === 'South America') { %>
+                            <li class="<%= userCountry.countryCode %>"><%= userCountry.name %> - 
+                            <a href="/user/<%= user.userId %>/<%= userCountry._id %>">View visits</a>
+                            <form action="/user/<%= user.userId %>/<%= userCountry._id %>?_method=DELETE" method="POST" id="delete-form"><button id="del-country-btn">Delete</button></form>
+                            </li>
+                        <% } %>
+                    <% }) %>                                      
+                <% } %>                
             </ul>
         </div>
     </div>
