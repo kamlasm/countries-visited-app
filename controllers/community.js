@@ -5,8 +5,6 @@ const Visit = require('../models/visit.js')
 const Country = require('../models/country.js')
 
 const isSignedIn = require('../middleware/is-signed-in.js')
-const toSorted = require('array.prototype.tosorted')
-const assert = require('assert')
 
 router.get('/', isSignedIn, async (req, res) => {
     try {
@@ -20,8 +18,6 @@ router.get('/', isSignedIn, async (req, res) => {
             }
             return 0
         })
-        
-        
 
         res.render('community/index.ejs', {countries, mostVisitedCountries,})
 
