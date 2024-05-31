@@ -15,7 +15,11 @@ const communityController = require('../../controllers/community.js')
 const passUserToView = require('../../middleware/pass-user-to-view.js')
 const passCountryToView = require('../../middleware/pass-country-to-view.js')
 
-mongoose.connect(process.env.MONGODB_URI)
+async function connectToDb() {
+    await mongoose.connect(process.env.MONGODB_URI);
+  }
+  
+connectToDb()
 
 app.use(express.static('public'))
 app.use(express.json()) 
@@ -33,9 +37,9 @@ app.use(session({
 app.use(passUserToView)
 app.use(passCountryToView)
 
-app.use('../../auth', authController)
-app.use('../../user', userController)
-app.use('../../community', communityController)
+app.use('/auth', authController)
+app.use('/user', userController)
+app.use('/community', communityController)
 
 app.get('/', (req, res) => {
     res.render('home.ejs', {
