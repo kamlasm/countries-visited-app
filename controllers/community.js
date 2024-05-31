@@ -11,7 +11,7 @@ const assert = require('assert')
 router.get('/', isSignedIn, async (req, res) => {
     try {
         const countries = await Country.find().sort({'name': 'asc'})
-        const mostVisitedCountries = countries.toSorted((a, b) => {
+        const mostVisitedCountries = [...countries].sort((a, b) => {
             if (a.visitors.length < b.visitors.length) {
                 return 1
             }
@@ -21,8 +21,7 @@ router.get('/', isSignedIn, async (req, res) => {
             return 0
         })
         
-        const shimmed = toSorted.shim()
-        assert.equal(shimmed, mostVisitedCountries.toSorted)
+        
 
         res.render('community/index.ejs', {countries, mostVisitedCountries,})
 
