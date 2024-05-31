@@ -9,7 +9,7 @@ body {
     background-position: 20% 20%;
     background-repeat: no-repeat;
     margin: 0;
-    min-height: 900px;
+    min-height: 1100px;
     --main-colour: #304055;
     --second-colour: #2a834c;
     --third-colour: #fdfefd;
@@ -58,6 +58,13 @@ button {
     color: var(--third-colour);
 }
 
+h4.continents {
+    color: var(--second-colour);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    margin: 5px 0 5px -18px;
+}
+
 /* Forms */
 label {
     padding-right: 5px;
@@ -91,23 +98,22 @@ form > p {
 
 /* nav bar */
 nav {
-    margin-left: 10px;
     color: var(--third-colour);
-}
-
-nav > p {
-    margin-left: 0;
-}
-
-.nav-links {
+    background-color: var(--second-colour);
+    font-size: 0.9em;
     display: flex;
-    flex-direction: row;
-    gap: 10px;
-    padding-bottom: 10px;
+    align-items: center;
+    gap: 15px;
 }
 
-.nav-links > a, .nav-links > a:visited {
+.nav-links, .nav-links:visited {
     color: var(--third-colour);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links:hover {
+    text-shadow: 0.2px 0.2px;
 }
 
 /* Home page */
@@ -155,6 +161,15 @@ nav > p {
 }
 
 /* community page */
+#comm-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
+    max-height: 500px;
+    max-width: 500px;
+}
+
 .comm-countries > a {
     text-decoration: none;
 }
@@ -179,5 +194,20 @@ nav > p {
 @media (max-width: 1000px) {
     .main-div, #settings {
         max-width: 200px;
+    }
+    #comm-container {
+        max-height: unset;
+    }
+}
+
+@media (max-width: 400px) {
+    nav {
+        flex-direction: column;
+        gap: 5px;
+        padding-bottom: 5px;
+    }
+
+    nav > p {
+        margin: 5px;
     }
 }

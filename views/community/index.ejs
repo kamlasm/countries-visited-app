@@ -21,10 +21,53 @@
         <form>
             <input type="text" placeholder="Search" id="search-input">
         </form>
-        <ul>
+        <ul id="comm-container">
+            <h4 class="continents comm-countries">Africa</h4>
             <% countries.forEach(country => { %>
                 <% if (country.visitors.length !== 0) { %>
+                        <% if (country.continent === 'Africa') { %>
                     <li class="comm-countries"><a href="/community/<%= country._id %>"><%= country.name %></a></li>
+                        <% } %>
+                <% } %>           
+            <% }) %>
+            <h4 class="continents comm-countries">Asia</h4>
+            <% countries.forEach(country => { %>
+                <% if (country.visitors.length !== 0) { %>
+                        <% if (country.continent === 'Asia') { %>
+                    <li class="comm-countries"><a href="/community/<%= country._id %>"><%= country.name %></a></li>
+                        <% } %>
+                <% } %>           
+            <% }) %>
+            <h4 class="continents comm-countries">Europe</h4>
+            <% countries.forEach(country => { %>
+                <% if (country.visitors.length !== 0) { %>
+                        <% if (country.continent === 'Europe') { %>
+                    <li class="comm-countries"><a href="/community/<%= country._id %>"><%= country.name %></a></li>
+                        <% } %>
+                <% } %>           
+            <% }) %>
+            <h4 class="continents comm-countries">North America</h4>
+            <% countries.forEach(country => { %>
+                <% if (country.visitors.length !== 0) { %>
+                        <% if (country.continent === 'North America') { %>
+                    <li class="comm-countries"><a href="/community/<%= country._id %>"><%= country.name %></a></li>
+                        <% } %>
+                <% } %>           
+            <% }) %>
+            <h4 class="continents comm-countries">Oceania</h4>
+            <% countries.forEach(country => { %>
+                <% if (country.visitors.length !== 0) { %>
+                        <% if (country.continent === 'Oceania') { %>
+                    <li class="comm-countries"><a href="/community/<%= country._id %>"><%= country.name %></a></li>
+                        <% } %>
+                <% } %>           
+            <% }) %>
+            <h4 class="continents comm-countries">South America</h4>
+            <% countries.forEach(country => { %>
+                <% if (country.visitors.length !== 0) { %>
+                        <% if (country.continent === 'South America') { %>
+                    <li class="comm-countries"><a href="/community/<%= country._id %>"><%= country.name %></a></li>
+                        <% } %>
                 <% } %>           
             <% }) %>
         </ul>

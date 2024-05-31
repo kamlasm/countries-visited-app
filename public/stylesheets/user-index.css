@@ -10,15 +10,20 @@ body {
 }
 
 #map-div {
-    width: 100%;
+    width: 99vw;
     background-color: #387ab5;
-    padding: 5px 0;
+    /* padding: 5px 0 0 100px;  */
 }
 
 #map {
     background-color: #387ab5;
-    width: 100%;
-    height: 100%;   
+    padding: 5px 0 0 60px;  
+}
+
+path {
+    fill: var(--third-colour);
+    stroke: var(--main-colour);
+    stroke-width: 0.1;
 }
 
 .visited {
@@ -30,11 +35,12 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     gap: 5px;
-    max-height: 400px;
+    max-height: 500px;
 }
 
 #user-countries > li {
     font-weight: bold;
+    padding-right: 50px;
 }
 
 li > a {
@@ -56,7 +62,7 @@ li > a {
 
 @media (max-width: 1000px) {
     #user-countries {
-        max-height: 500px;
+        max-height: 700px;
     }
 }
 
