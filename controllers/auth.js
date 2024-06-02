@@ -19,6 +19,15 @@ router.post('/sign-up', async (req, res) => {
             throw new Error('Passwords don\'t match. Please try again.')
         }
 
+        const hasUpperCase = /[A-Z]/.test(req.body.password)
+        if (!hasUpperCase) {
+            throw new Error('Password must contain at least one uppercase letter')
+        }
+    
+        if (req.body.password.length < 6) {
+            throw new Error('Password must be at least 6 characters long.')
+        }
+
         const hashedPassword = bcrypt.hashSync(req.body.password, 10)
         req.body.password = hashedPassword
     

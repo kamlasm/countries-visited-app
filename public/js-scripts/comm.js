@@ -12,7 +12,7 @@ function filterCountries(event) {
     })
 }
 
-const searchInput = document.querySelector('#search-input')
+const searchInput = document.querySelector('.search-input')
 searchInput.addEventListener("input", filterCountries)
 
 const countryList = document.querySelectorAll('.comm-countries')

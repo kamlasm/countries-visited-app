@@ -16,13 +16,16 @@
         <h2>World visited: <%= Math.floor(userCountries.length / 195 * 100) %>%</h2>
     </div>    
     <div id="map-div">
-        <%- include ("../world2.svg") %>
+        <%- include ("../world.svg") %>
     </div>    
     <div>
         <h3>Countries been</h3>
         <button class="add-btns"> 
             <a href="/user/<%= user.userId %>/new-country" >Add a country</a>
         </button>
+        <form>
+            <input type="text" placeholder="Search" class="search-input" id="user-search">
+        </form>
         <div>
             <ul id="user-countries">
                 <% if (userCountries.some(userCountry => { return userCountry.continent === 'Africa'})) { %>

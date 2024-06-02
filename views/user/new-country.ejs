@@ -9,6 +9,9 @@
 <body>
     <%- include('../partials/nav.ejs') %>
     <h1>Add a new country visited!</h1>
+    <% if (typeof msg !== 'undefined') { %>
+        <h3> <%= msg %> </h3>
+    <% } %>
     <form action="/user/<%= user.userId %>/new-country" method="POST" class="forms">
         <label for="countryName">Country: </label>
         <select name="countryName">

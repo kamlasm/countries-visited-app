@@ -55,7 +55,7 @@ router.post('/:userId/new-country', isSignedIn, async (req, res) => {
 
         res.redirect(`/user/${req.params.userId}/${country.id}`)
     } catch (error) {
-        res.render('error.ejs', { msg: error.message })
+        res.render('user/new-country.ejs', { msg: error.message })
     }
 })
 

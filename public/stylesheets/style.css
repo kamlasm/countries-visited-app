@@ -166,8 +166,11 @@ nav {
     flex-direction: column;
     flex-wrap: wrap;
     gap: 5px;
-    max-height: 500px;
-    max-width: 500px;
+    max-height: 600px;
+}
+
+.comm-countries {
+    margin-right: 20px;
 }
 
 .comm-countries > a {
@@ -189,14 +192,15 @@ nav {
     .main-div {
         max-width: 400px;
     }
+
+    #comm-container {
+        max-height: 800px;
+    }
 }
 
 @media (max-width: 1000px) {
     .main-div, #settings {
         max-width: 200px;
-    }
-    #comm-container {
-        max-height: unset;
     }
 }
 
